@@ -48,13 +48,70 @@ libr("writexl")      #Will probably be necessary for writing the excel-File in t
 #                  if the question is not answered. Maybe a warning.
 
 #Create a data.frame q1 with one question in it.
-q1 <- data.frame(question = "What is your favorite food?",
-                 option = "Your Answer",
+q1 <- data.frame(question = "Vorname",
+                 option = "First Name",
                  input_type = "text",
-                 input_id = "favorite_food",
+                 input_id = "first_name",
                  dependence = NA,
                  dependence_value = NA,
-                 required = F)
+                 required = T)
+#Create a data.frame q2 with another question in it.
+q2 <- data.frame(question = "Nachname",
+                 option = "Last Name",
+                 input_type = "text",
+                 input_id = "last_name",
+                 dependence = NA,
+                 dependence_value = NA,
+                 required = T)
+q3 <- data.frame(question = "Studium/Typ der Arbeit",
+                 option = "Study/Job Type",
+                 input_type = "text",
+                 input_id = "study_job",
+                 dependence = NA,
+                 dependence_value = NA,
+                 required = T)
+q4 <- data.frame(question = "Fachbereich",
+                 option = "Subject",
+                 input_type = "text",
+                 input_id = "subject",
+                 dependence = NA,
+                 dependence_value = NA,
+                 required = T)
+q5 <- data.frame(question = "Erst Betreuer/in",
+                 option = "Main Supervisor",
+                 input_type = "text",
+                 input_id = "main_supervisor",
+                 dependence = NA,
+                 dependence_value = NA,
+                 required = T)
+q6 <- data.frame(question = "Sind Sie RAM-Mitglieder?",
+                 option = c("Ja","Nein"),
+                 input_type = "y/n",
+                 input_id = "membeship",
+                 dependence = NA,
+                 dependence_value = NA,
+                 required = T)
+q7 <- data.frame(question = "Was ist der Preis bzw. FÃ¶rdungersart, den Sie beantragen mÃ¶chten?",
+                 option = c("TeilfÃ¶rderung","Otto-Selz Preis","FÃ¶rderung","RAT-Preis","RAM-Preis"),
+                 input_type = "mc",
+                 input_id = "prize_subsidary_type",
+                 dependence = NA,
+                 dependence_value = NA,
+                 required = T)
+q8 <- data.frame(question = "Bitte beschreiben Sie den Zweck der FÃ¶rderung:",
+                 option = "Please describe the purpose of this prize or subsidary",
+                 input_type = "text",
+                 input_id = "purpose",
+                 dependence = NA,
+                 dependence_value = NA,
+                 required = T)
+q9 <- data.frame(question = "Preisgeld bzw. FÃ¶rderungsbetrag (â¬):",
+                 option = "Amount of prize or subsidary (â¬)",
+                 input_type = "text",
+                 input_id = "amount",
+                 dependence = NA,
+                 dependence_value = NA,
+                 required = T)
 
 #Create a data.frame q2 with another question in it.
 q2 <- data.frame(question = "What is your  food?",
@@ -66,7 +123,7 @@ q2 <- data.frame(question = "What is your  food?",
                  required = F)
 
 #Put both data.frames together into one data.frame df
-df <- rbind(q1, q2)
+df <- rbind(q1, q2, q3, q4, q5, q6, q7, q8, q9)
 
 #1-2-2 Table####
 
