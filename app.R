@@ -113,15 +113,6 @@ q9 <- data.frame(question = "Preisgeld bzw. FÃ¶rderungsbetrag (â¬):",
                  dependence_value = NA,
                  required = T)
 
-#Create a data.frame q2 with another question in it.
-q2 <- data.frame(question = "What is your  food?",
-                 option = "Your Answer",
-                 input_type = "text",
-                 input_id = "favorite",
-                 dependence = NA,
-                 dependence_value = NA,
-                 required = F)
-
 #Put both data.frames together into one data.frame df
 df <- rbind(q1, q2, q3, q4, q5, q6, q7, q8, q9)
 
