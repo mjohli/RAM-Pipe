@@ -48,6 +48,8 @@ libr("writexl")      #Will probably be necessary for writing the excel-File in t
 #                  if the question is not answered. Maybe a warning.
 
 #Create a data.frame q1 with one question in it.
+dat <- read.csv2("Questions.CSV")
+dat$option[dat$question == "Jahr"] <- format(Sys.Date(), "%Y")
 q1 <- data.frame(question = "Vorname",
                  option = "First Name",
                  input_type = "text",
@@ -134,7 +136,7 @@ ui <- fluidPage(
     #df:                 The data.frame containing the questions.
     #survey_title:       Should be shown at the top of the page
     #survey_description: Should be shown underneath the title but not sure.
-    surveyOutput(df = df,
+    surveyOutput(df = dat,
                  survey_title = "Hello, World!",
                  survey_description = "Welcome! This is a demo survey showing off the {shinysurveys} package."),
     
