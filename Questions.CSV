@@ -1,0 +1,14 @@
+question;option;input_type;input_id;dependence;dependence_value;required
+Jahr;;nu;year;;;
+Nachname;;;surname;;;
+Vorname;;;name;;;
+Level der Arbeit;;;level;;;
+Fach;;;major;;;
+Betreuer*in;;;supervisor;;;
+Preis;;;prize;;;
+Titel der Arbeit;;;title;;;
+Sprache der Arbeit;;;language;;;
+Art;Förderung, Preis;;type;;;
+Förderungsart;Förderung, Teilförderung;;funding_type;;;
+Ort;;;location;;;
+Land;;;country;;;
