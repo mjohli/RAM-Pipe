@@ -1,14 +1,37 @@
 question;option;input_type;input_id;dependence;dependence_value;required
-Jahr;;nu;year;;;
-Nachname;;;surname;;;
-Vorname;;;name;;;
-Level der Arbeit;;;level;;;
-Fach;;;major;;;
-Betreuer*in;;;supervisor;;;
-Preis;;;prize;;;
-Titel der Arbeit;;;title;;;
-Sprache der Arbeit;;;language;;;
-Art;Förderung, Preis;;type;;;
-Förderungsart;Förderung, Teilförderung;;funding_type;;;
-Ort;;;location;;;
-Land;;;country;;;
+Jahr;;numeric;year;NA;NA;T
+Nachname;;text;surname;NA;NA;T
+Vorname;;text;name;NA;NA;T
+Level der Arbeit;Bachelor;mc;level;NA;NA;T
+Level der Arbeit;Master;mc;level;NA;NA;T
+Level der Arbeit;PhD;mc;level;NA;NA;T
+Level der Arbeit;Diplom;mc;level;NA;NA;T
+Level der Arbeit;Magister;mc;level;NA;NA;T
+Level der Arbeit;Sonstiges;mc;level;NA;NA;T
+Level der Arbeit;;text;levelAlt;level;Sonstiges;T
+Fach;Soziologie;mc;major;NA;NA;T
+Fach;Politikwissenschaften;mc;major;NA;NA;T
+Fach;Psychologie;mc;major;NA;NA;T
+Fach;Sozialwissenschaften;mc;major;NA;NA;T
+Fach;Erziehungswissenschaften;mc;major;NA;NA;T
+Fach;CDSS;mc;major;NA;NA;T
+Fach;Sonstiges;mc;major;NA;NA;T
+Fach;;text;majorAlt;major;Sonstiges;T
+Betreuer*in;;text;supervisor;NA;NA;T
+Art;Förderung;mc;type;NA;NA;T
+Art;Preis;mc;type;NA;NA;T
+Preis;Franz-Urban-Pappi-Preis;mc;prize;type;Preis;T
+Preis;Otto-Selz-Preis;mc;prize;type;Preis;T
+Preis;Hans-Albert-Preis;mc;prize;type;Preis;T
+Preis;RAM-Preis;mc;prize;type;Preis;T
+Preis;RAT-Preis;mc;prize;type;Preis;T
+Preis;Sonstiges;mc;prize;type;Preis;T
+Preis;;text;prizeAlt;prize;Sonstiges;T
+Förderungsart;Teilförderung;mc;funding_type;type;Förderung;T
+Förderungsart;Förderung;mc;funding_type;type;Förderung;T
+Titel der Arbeit;;text;title;NA;NA;T
+Sprache der Arbeit;de;mc;language;NA;NA;T
+Sprache der Arbeit;en;mc;language;NA;NA;T
+Englische Übersetzung des Titels;;text;titleEn;language;de;T
+Ort;;text;location;NA;NA;T
+Land;;text;country;NA;NA;T
