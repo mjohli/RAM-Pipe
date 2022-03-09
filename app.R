@@ -28,10 +28,6 @@ libr("writexl")      #Will probably be necessary for writing the excel-File in t
 
 #1-2-1 Survey data####
 
-#This right now is not very neat and ugly. the survey takes its input (questions etc.) 
-#from a data.frame. Here two data.frames are created manually, but I think it would be
-#easier and more beautiful to just read a .csv or similar containing the parameters as
-#variables, as proposed in Questions.xlsx.
 #question:         The question that appears in the survey.
 #option:           Not exactly sure what this does, in text-inputs it appears to be the 
 #                  text that is in the input field in the beginning.
@@ -47,76 +43,34 @@ libr("writexl")      #Will probably be necessary for writing the excel-File in t
 #required:         This specifies if the question must be answered, not sure what happens
 #                  if the question is not answered. Maybe a warning.
 
-#Create a data.frame q1 with one question in it.
+#Read Questions.CSV containing the questions
+#Variables currently in Questions.CSV:
+#question:         The question that appears in the survey.
+#option:           Not exactly sure what this does, in text-inputs it appears to be the 
+#                  text that is in the input field in the beginning.
+#input_type:       This seems to define if the question is numeric, text, or another type
+#                  (I guess that multiple-choice is possible). Not sure what is possible
+#                  here.
+#input_id          This is the name of the variable the answer to this question will be
+#                  saved. It can be obtained in the server-part using input$input_id.
+#dependence:       This is kind of a connection to other questions like "show this question if
+#                  another question was answered yes" but not sure how it works
+#dependence_value: This is also for the connection to other questions. Maybe dependence
+#                  defines which question and dependence_value which value is needed.
+#required:         This specifies if the question must be answered, not sure what happens
+#                  if the question is not answered. Maybe a warning.
+#Variables possible (that I know of):
+#page:             If we want more than one page, we can specify on which page the question
+#                  should be.
 dat <- read.csv2("Questions.CSV")
-dat$option[dat$question == "Jahr"] <- format(Sys.Date(), "%Y")
-q1 <- data.frame(question = "Vorname",
-                 option = "First Name",
-                 input_type = "text",
-                 input_id = "first_name",
-                 dependence = NA,
-                 dependence_value = NA,
-                 required = T)
-#Create a data.frame q2 with another question in it.
-q2 <- data.frame(question = "Nachname",
-                 option = "Last Name",
-                 input_type = "text",
-                 input_id = "last_name",
-                 dependence = NA,
-                 dependence_value = NA,
-                 required = T)
-q3 <- data.frame(question = "Studium/Typ der Arbeit",
-                 option = "Study/Job Type",
-                 input_type = "text",
-                 input_id = "study_job",
-                 dependence = NA,
-                 dependence_value = NA,
-                 required = T)
-q4 <- data.frame(question = "Fachbereich",
-                 option = "Subject",
-                 input_type = "text",
-                 input_id = "subject",
-                 dependence = NA,
-                 dependence_value = NA,
-                 required = T)
-q5 <- data.frame(question = "Erst Betreuer/in",
-                 option = "Main Supervisor",
-                 input_type = "text",
-                 input_id = "main_supervisor",
-                 dependence = NA,
-                 dependence_value = NA,
-                 required = T)
-q6 <- data.frame(question = "Sind Sie RAM-Mitglieder?",
-                 option = c("Ja","Nein"),
-                 input_type = "y/n",
-                 input_id = "membeship",
-                 dependence = NA,
-                 dependence_value = NA,
-                 required = T)
-q7 <- data.frame(question = "Was ist der Preis bzw. FÃ¶rdungersart, den Sie beantragen mÃ¶chten?",
-                 option = c("TeilfÃ¶rderung","Otto-Selz Preis","FÃ¶rderung","RAT-Preis","RAM-Preis"),
-                 input_type = "mc",
-                 input_id = "prize_subsidary_type",
-                 dependence = NA,
-                 dependence_value = NA,
-                 required = T)
-q8 <- data.frame(question = "Bitte beschreiben Sie den Zweck der FÃ¶rderung:",
-                 option = "Please describe the purpose of this prize or subsidary",
-                 input_type = "text",
-                 input_id = "purpose",
-                 dependence = NA,
-                 dependence_value = NA,
-                 required = T)
-q9 <- data.frame(question = "Preisgeld bzw. FÃ¶rderungsbetrag (â¬):",
-                 option = "Amount of prize or subsidary (â¬)",
-                 input_type = "text",
-                 input_id = "amount",
-                 dependence = NA,
-                 dependence_value = NA,
-                 required = T)
 
-#Put both data.frames together into one data.frame df
-df <- rbind(q1, q2, q3, q4, q5, q6, q7, q8, q9)
+#Setting the current year as a proposition. Right now this is grey and not 'written' into the
+#input field. In my opinion there are two possibilities how to deal with this: Finding out how
+#to put an actual value into an input field or finding out how to color the year black and setting
+#the year variable in the output-file to the current year if it's left empty. Also for year it would
+#be of interest if we can define minimum and maximum input values. This should at least be possible
+#using if-statements inside the ui and/or server.
+dat$option[dat$question == "Jahr"] <- format(Sys.Date(), "%Y")
 
 #1-2-2 Table####
 
