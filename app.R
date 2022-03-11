@@ -106,6 +106,10 @@ ui <- fluidPage(
 
 #I don't really know why server needs input, output, and session as parameters but it
 #seems to work like this.
+#I guess that the translation with deepl will take place in the server part. Titles should
+#be translated from german to english if they are not titles of a thesis (Bachelor, Master
+#, ...)
+
 server <- function(input, output, session) {
     
     #I think this is necessary for the survey but I have no clue (yet) what it does.
