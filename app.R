@@ -23,7 +23,7 @@ libr("shinysurveys") #Necessary for the survey part.
 libr("readxl")       #Necessary for reading the excel-File we want to append the results
                      #of the survey to.
 libr("writexl")      #Will probably be necessary for writing the excel-File in the end.
-
+libr("tidyverse")    #necessary for data wrangling
 #1-2   Import data####
 
 #1-2-1 Survey data####
@@ -128,7 +128,65 @@ server <- function(input, output, session) {
     #submit-button by displaying a dialogue window containing text. In general one can
     #react to things happening with user input using observeEvent()
     observeEvent(input$submit, {
-        showModal(modalDialog(
+      #load survey data in
+      response_data <- getSurveyData() %>% 
+        #select relevant variables
+        select(question_id, response) %>% 
+        #to wide format
+        pivot_wider(names_from = "question_id" ,
+                    values_from = "response") 
+      #shape data so it fits the excel:
+      #we often have two columns where only one column exists in the excel 
+      #Since one of those two columns (e.g.: level of education, level of education alternative)
+      #is always empty, the alternative column gets deleted. If the alternative column (level of education alternative: Dr. med)
+      #includes data, the data gets transferred to the first column (level of education: HIDDEN_QUESTION) as it must be empty.
+      if (response_data$levelAlt == 'HIDDEN-QUESTION') {
+        response_data$levelAlt <- NULL
+      } else {
+        response_data$level <- response_data$levelAlt
+        response_data$levelAlt <- NULL
+      }
+      if (response_data$majorAlt == 'HIDDEN-QUESTION') {
+        response_data$majorAlt <- NULL
+      } else {
+        response_data$major <- response_data$majorAlt
+        response_data$majorAlt <- NULL
+      }
+      if (response_data$prizeAlt == 'HIDDEN-QUESTION') {
+        response_data$prizeAlt <- NULL
+      } else {
+        response_data$prize <- response_data$prizeAlt
+        response_data$prizeAlt <- NULL
+      }
+      if (response_data$prize == 'HIDDEN-QUESTION') {
+        response_data$prize <- ''
+      }
+      if (response_data$funding_type == 'HIDDEN-QUESTION') {
+        response_data$funding_type <- ''
+      }
+      #order data so it fits the excel
+      col_order <- c("year", "surname", "name",
+                     "level", "major", "supervisor", 
+                     'prize', 'title', 'language', 'type',
+                     'funding_type', 'location', 'country')
+      #apply order
+      response_data <- response_data[, col_order]
+      
+      #read latest excel in 
+      #part below only works when the first excel file was written - delete ### after first use
+        # old_data <-   list.files( pattern = '20[0-9][0-9]-[0-9][0-9]-[0-9][0-9].xlsx') %>%
+        #   map_df(~read_xlsx(.))
+        
+      # following line as comment after first use
+      old_data <- read_xlsx("funding_overview_all.xlsx")
+        
+      #(over)write archive version
+      write_xlsx(old_data, 'funding_overview_all_alt.xlsx')
+      #merge data
+      merged <- rbind(old_data, response_data)
+      #write new excel with today's date
+      write_xlsx(merged, paste0('funding_overview_all_',Sys.Date() ,'.xlsx'))
+      showModal(modalDialog(
             title = "Congrats, you completed your first shinysurvey!",
             "You can customize what actions happen when a user finishes a survey using input$submit."
         ))
