@@ -139,3 +139,5 @@ server <- function(input, output, session) {
 
 #This starts the app using the previously defined ui and server.
 shinyApp(ui, server)
+
+# Ende
