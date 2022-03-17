@@ -84,15 +84,42 @@ dat$option[dat$question == "Jahr"] <- format(Sys.Date(), "%Y")
 #2-1   Page####
 
 #fluidPage generates the user-interface
+#Hex codes from RAM:
+#  #ffffff
+#  #759dbd
+#  #043a6f
+#  #d7e0e7
+#  #0a477a
+
 ui <- fluidPage(
-  
+## the title font size, position, content, color, style
+  tags$div(class="h2", checked=NA, align ="center",
+           tags$p("Survey Title", style = "color:#0a477a; font-family: Arial Black")),
+
+## the description font size, position, content, color, style
+  tags$div(class="h4", checked=NA, align ="center",
+           tags$p("Survey Description", style = "color:#043a6f; font-family: Calibri")),
+
+## the survey area background color
+## the survey question font color and style
+##??not yet found how to change the font size and the question cell background color??
+  tags$div(
+    dataTableOutput("df"),
+    style = "
+           background-color:#043a6f;
+           color:#d7e0e7;
+           font-family: Times New Roman;
+           font-size: 10px",
+    
     #surveyOutput creates a questionnaire.
     #df:                 The data.frame containing the questions.
     #survey_title:       Should be shown at the top of the page
     #survey_description: Should be shown underneath the title but not sure.
     surveyOutput(df = dat,
-                 survey_title = "Hello, World!",
-                 survey_description = "Welcome! This is a demo survey showing off the {shinysurveys} package."),
+    #             survey_title = "Hello, World!",
+    #             survey_description = "Welcome! This is a demo survey showing off the {shinysurveys} package."),
+                 theme = "#759dbd",               ## the page background color
+                ),
     
     #This generates an output which is specified as output$text in the server-part.
     #In general that's how you create reactive output. Define it as output$xy in the
