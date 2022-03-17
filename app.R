@@ -104,7 +104,7 @@ ui <- fluidPage(
 ## the survey question font color and style
 ##??not yet found how to change the font size and the question cell background color??
   tags$div(
-    dataTableOutput("df"),
+    dataTableOutput("dat"),
     style = "
            background-color:#043a6f;
            color:#d7e0e7;
