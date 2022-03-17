@@ -109,7 +109,7 @@ ui <- fluidPage(
            background-color:#043a6f;
            color:#d7e0e7;
            font-family: Times New Roman;
-           font-size: 10px",
+           font-size: 10px"),
     
     #surveyOutput creates a questionnaire.
     #df:                 The data.frame containing the questions.
@@ -119,14 +119,7 @@ ui <- fluidPage(
     #             survey_title = "Hello, World!",
     #             survey_description = "Welcome! This is a demo survey showing off the {shinysurveys} package."),
                  theme = "#759dbd",               ## the page background color
-                ),
-    
-    #This generates an output which is specified as output$text in the server-part.
-    #In general that's how you create reactive output. Define it as output$xy in the
-    #server part and put an appropriate output function into the ui-part (there's e.g.,
-    #tableOutput, plotOutput, ...). Also note that in the ui-part the outputs are
-    #separated with commas.
-    htmlOutput("text")
+                )
 )
 
 #2-2   Server####
@@ -142,15 +135,6 @@ server <- function(input, output, session) {
     #I think this is necessary for the survey but I have no clue (yet) what it does.
     renderSurvey()
   
-    #This takes the text written in the question with question_id favorite and puts it
-    #into output$text to display it in the user interface. This is just a proof of concept
-    #and to have something where one can see how this works and what is necessary a) to
-    #use input inside the ui and b) to access the input from the questionnaire to append
-    #to the data later.
-    output$text <- renderText({ 
-      input$favorite 
-    })
-    
     #This reacts to a press on the (I guess automatically with SurveyOutput generated)
     #submit-button by displaying a dialogue window containing text. In general one can
     #react to things happening with user input using observeEvent()
