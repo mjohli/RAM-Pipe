@@ -1,3 +1,23 @@
+#0 Clear R's memory
+rm(list=ls())
+setwd("E:/Mein Ordner/Shiny/Zeug/RAM-Pipe") 		# sets the working directory
+getwd() 			                                  # shows you the present working directory
+
+#0-0 Load packages (Wir k?nnen ja sp?ter entscheiden, wie wir die packages einheitlich laden, etc.)
+packages <- c("shiny",
+              "shinysurveys",
+              "readxl",
+              "writexl",
+              "tidyverse",
+              "pck"
+)
+
+# Install uninstalled packages
+lapply(packages[!(packages %in% installed.packages())], install.packages)
+
+# Load all packages to library
+lapply(packages, library, character.only = TRUE)
+
 #1     Preparations####
 
 #1-1   Import libraries####
@@ -83,43 +103,51 @@ dat$option[dat$question == "Jahr"] <- format(Sys.Date(), "%Y")
 
 #2-1   Page####
 
-#fluidPage generates the user-interface
-#Hex codes from RAM:
-#  #ffffff
-#  #759dbd
-#  #043a6f
-#  #d7e0e7
-#  #0a477a
+# We are using the shiny package to generate the user-interface. "fluidPage" generates the user-interface.
+
+#Hex codes (color codes) from RAM:
+#  #ffffff - white
+#  #759dbd - light blue
+#  #043a6f - dark blue
+#  #d7e0e7 - also white lol?
+#  #0a477a - dark, 'neon' blue
 
 ui <- fluidPage(
-## the title font size, position, content, color, style
+  ## Here we define the header of the survey. 
+  tags$div(class="h1", checked=NA, align ="center",
+           tags$p("Verwaltungshilfe-Tool", style = "color:#ffffff; 
+                                                    font-family: Calibri; 
+                                                    font-size:40px")),
+  
+  ## Defining the description/subheading. 
   tags$div(class="h2", checked=NA, align ="center",
-           tags$p("Survey Title", style = "color:#0a477a; font-family: Arial Black")),
-
-## the description font size, position, content, color, style
-  tags$div(class="h4", checked=NA, align ="center",
-           tags$p("Survey Description", style = "color:#043a6f; font-family: Calibri")),
-
-## the survey area background color
-## the survey question font color and style
-##??not yet found how to change the font size and the question cell background color??
+           tags$p("RAM-Förderungen / - Preisvergabe", style = "color:#ffffff; 
+                                                              font-family: Calibri; 
+                                                              font-size:25px")),
+  
+  ## Changing the survey area sub-background & questions. 
+  ## How to change question cell background color??
   tags$div(
     dataTableOutput("dat"),
     style = "
-           background-color:#043a6f;
-           color:#d7e0e7;
-           font-family: Times New Roman;
-           font-size: 10px"),
-    
-    #surveyOutput creates a questionnaire.
-    #df:                 The data.frame containing the questions.
-    #survey_title:       Should be shown at the top of the page
-    #survey_description: Should be shown underneath the title but not sure.
-    surveyOutput(df = dat,
-    #             survey_title = "Hello, World!",
-    #             survey_description = "Welcome! This is a demo survey showing off the {shinysurveys} package."),
-                 theme = "#759dbd",               ## the page background color
-                )
+          # background-color:#0a477a;     ### color of sub-background
+            color:#759dbd;                 ### color of the question-text
+            font-family: Arial;            ### Question-text font-family
+            font-size: 30px",              ### Question font size, Error!
+  
+  # Create a questionnaire with "surveyOutput".
+  #df:                 The data.frame containing the questions.
+  #survey_title:       Should be shown at the top of the page.
+  #survey_description: Should be shown underneath the title.
+  surveyOutput(df = dat,
+            ##   survey_title = "Hallo RAM!",
+            ##   survey_description = "Hier könnt Ihr die Infos für RAM-Förderungen und RAM-Preise eintragen",
+               theme = "#759dbd",                                                                              ## Defining page background color
+               style = "color: #759dbd;                                                                         ## Defining submit-button, color white does not appear?
+                       font-family: Calibri;
+                       font-size:20px"                                                                         
+               ) 
+          )
 )
 
 #2-2   Server####
