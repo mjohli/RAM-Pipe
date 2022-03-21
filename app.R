@@ -1,7 +1,5 @@
 #0 Clear R's memory
 rm(list=ls())
-setwd("E:/Mein Ordner/Shiny/Zeug/RAM-Pipe") 		# sets the working directory
-getwd() 			                                  # shows you the present working directory
 
 #0-0 Load packages (Wir k?nnen ja sp?ter entscheiden, wie wir die packages einheitlich laden, etc.)
 packages <- c("shiny",
@@ -22,20 +20,7 @@ lapply(packages, library, character.only = TRUE)
 
 #1-1   Import libraries####
 
-#1-1-1 Define library function####
-
-#First define a function that loads a package into the library and installs it
-#beforehand if the package is not yet installed.
-
-#pck: The name of the desired package.
-libr <- function(pck){
-  if(!require(pck, character.only = T)){
-    install.packages(pck)
-    library(pck, character.only = T)
-  }
-}
-
-#1-1-2 Import libraries####
+#1-1-1 Import libraries####
 
 #Load and install, if necessary, the packages needed.
 libr("shiny")        #Necessary for shiny itself.
