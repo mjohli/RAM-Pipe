@@ -3,6 +3,15 @@ rm(list=ls())
 
 getwd() 			                                  # shows you the present working directory
 
+
+
+#1     Preparations####
+
+#1-1   Import libraries####
+
+#1-1-1 Import libraries####
+
+# libr: a function to automatically install and open libraries
 #pck: The name of the desired package.
 libr <- function(pck){
   if(!require(pck, character.only = T)){
@@ -10,12 +19,6 @@ libr <- function(pck){
     library(pck, character.only = T)
   }
 }
-
-#1     Preparations####
-
-#1-1   Import libraries####
-
-#1-1-1 Import libraries####
 
 #Load and install, if necessary, the packages needed.
 libr("shiny")        #Necessary for shiny itself.
