@@ -1,22 +1,7 @@
 #0 Clear R's memory
 rm(list=ls())
-setwd("E:/Mein Ordner/Shiny/Zeug/RAM-Pipe") 		# sets the working directory
 getwd() 			                                  # shows you the present working directory
 
-#0-0 Load packages (Wir k?nnen ja sp?ter entscheiden, wie wir die packages einheitlich laden, etc.)
-packages <- c("shiny",
-              "shinysurveys",
-              "readxl",
-              "writexl",
-              "tidyverse",
-              "pck"
-)
-
-# Install uninstalled packages
-lapply(packages[!(packages %in% installed.packages())], install.packages)
-
-# Load all packages to library
-lapply(packages, library, character.only = TRUE)
 
 #1     Preparations####
 
