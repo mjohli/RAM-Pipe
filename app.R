@@ -1,16 +1,7 @@
 #0 Clear R's memory
 rm(list=ls())
+
 getwd() 			                                  # shows you the present working directory
-
-
-#1     Preparations####
-
-#1-1   Import libraries####
-
-#1-1-1 Define library function####
-
-#First define a function that loads a package into the library and installs it
-#beforehand if the package is not yet installed.
 
 #pck: The name of the desired package.
 libr <- function(pck){
@@ -20,7 +11,11 @@ libr <- function(pck){
   }
 }
 
-#1-1-2 Import libraries####
+#1     Preparations####
+
+#1-1   Import libraries####
+
+#1-1-1 Import libraries####
 
 #Load and install, if necessary, the packages needed.
 libr("shiny")        #Necessary for shiny itself.
