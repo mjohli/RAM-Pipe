@@ -1,9 +1,8 @@
 #0 Clear R's memory
 rm(list=ls())
 
-getwd() 			                                  # shows you the present working directory
-
-
+getwd() 			           # shows you the present working directory
+dir()                    # shows you what in the wd is
 
 #1     Preparations####
 
@@ -82,7 +81,7 @@ dat$option[dat$question == "Jahr"] <- format(Sys.Date(), "%Y")
 #2     Shiny-App####
 
 #Now the fun begins. The shiny-app consists out of two parts: the user-interface, where we
-#define how the things the user sees look like and behave
+#define how the things the user sees look like and behave.
 
 #2-1   Page####
 
@@ -95,42 +94,85 @@ dat$option[dat$question == "Jahr"] <- format(Sys.Date(), "%Y")
 #  #d7e0e7 - also white lol?
 #  #0a477a - dark, 'neon' blue
 
+################################################################################
+# Failed try to customize ui
+
+# ui <- fluidPage(
+#   ## Here we define the header of the survey. 
+#   tags$div(class="h1", checked=NA, align ="center",
+#            tags$p("Verwaltungshilfe-Tool", style = "color:#ffffff; 
+#                                                     font-family: Calibri; 
+#                                                     font-size:40px")),
+#   
+#   ## Defining the description/subheading. 
+#   tags$div(class="h2", checked=NA, align ="center",
+#            tags$p("RAM-Förderungen / - Preisvergabe", style = "color:#ffffff; 
+#                                                               font-family: Calibri; 
+#                                                               font-size:25px")),
+#   
+#   ## Changing the survey area sub-background & questions. 
+#   ## How to change question cell background color??
+#   tags$div(
+#     dataTableOutput("dat"),
+#     style = "background-color: #0a477a;      ### color of sub-background
+#              color:#0a477a;                 ### color of the question-text
+#              font-family: Arial;            ### Question-text font-family
+#              font-size: 30px;              ### Question font size, Error!
+#              ",
+#     
+#   # Create a questionnaire with "surveyOutput".
+#   #df:                 The data.frame containing the questions.
+#   #survey_title:       Should be shown at the top of the page.
+#   #survey_description: Should be shown underneath the title.
+#   surveyOutput(df = dat,
+#                # survey_title = "Hallo RAM!",
+#                # survey_description = "Hier könnt Ihr die Infos für RAM-Förderungen und RAM-Preise eintragen",
+#                 theme = "style.css",                                                                               ## Defining page background color
+#                 style = "color: #759dbd;                                                                         ## Defining submit-button, color white does not appear?
+#                        font-family: Calibri;
+#                        font-size:20px,"                                                                         
+#                ) 
+#           )
+# )
+
+################################################################################
+
 ui <- fluidPage(
-  ## Here we define the header of the survey. 
-  tags$div(class="h1", checked=NA, align ="center",
-           tags$p("Verwaltungshilfe-Tool", style = "color:#ffffff; 
-                                                    font-family: Calibri; 
-                                                    font-size:40px")),
-  
-  ## Defining the description/subheading. 
-  tags$div(class="h2", checked=NA, align ="center",
-           tags$p("RAM-Förderungen / - Preisvergabe", style = "color:#ffffff; 
-                                                              font-family: Calibri; 
-                                                              font-size:25px")),
-  
-  ## Changing the survey area sub-background & questions. 
-  ## How to change question cell background color??
-  tags$div(
-    dataTableOutput("dat"),
-    style = "
-          # background-color:#0a477a;     ### color of sub-background
-            color:#759dbd;                 ### color of the question-text
+ ## Here we define the header of the survey.
+ tags$div(class="h1", checked=NA, align ="center",
+          tags$p("Verwaltungshilfe-Tool", style = "color:#ffffff;
+                                                   font-family: Calibri;
+                                                   font-size:40px")),
+
+ ## Defining the description/subheading.
+ tags$div(class="h2", checked=NA, align ="center",
+          tags$p("RAM-Förderungen / - Preisvergabe", style = "color:#ffffff;
+                                                             font-family: Calibri;
+                                                             font-size:25px")),
+
+ ## Changing the survey area sub-background & questions.
+ ## How to change question cell background color??
+ tags$div(
+   dataTableOutput("dat"),
+   style = "background-color:#0a477a;      ### color of sub-background
+            color:#0a477a;                 ### color of the question-text
             font-family: Arial;            ### Question-text font-family
             font-size: 30px",              ### Question font size, Error!
-  
-  # Create a questionnaire with "surveyOutput".
+
+
+   # Create a questionnaire with "surveyOutput".
   #df:                 The data.frame containing the questions.
   #survey_title:       Should be shown at the top of the page.
   #survey_description: Should be shown underneath the title.
-  surveyOutput(df = dat,
-            ##   survey_title = "Hallo RAM!",
-            ##   survey_description = "Hier könnt Ihr die Infos für RAM-Förderungen und RAM-Preise eintragen",
-               theme = "#759dbd",                                                                              ## Defining page background color
-               style = "color: #759dbd;                                                                         ## Defining submit-button, color white does not appear?
-                       font-family: Calibri;
-                       font-size:20px"                                                                         
-               ) 
-          )
+   surveyOutput(df = dat,
+                # survey_title = "Hallo RAM!",
+                # survey_description = "Hier könnt Ihr die Infos für RAM-Förderungen und RAM-Preise eintragen",
+                theme = "#759dbd",                                                                               ## Defining page background color
+                style = "color: #759dbd;                                                                         ## Defining submit-button, color white does not appear?
+                      font-family: Calibri;
+                     font-size:20px,"
+  )
+ )
 )
 
 #2-2   Server####
