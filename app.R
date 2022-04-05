@@ -95,85 +95,76 @@ dat$option[dat$question == "Jahr"] <- format(Sys.Date(), "%Y")
 #  #0a477a - dark, 'neon' blue
 
 ################################################################################
-# Failed try to customize ui
 
 # ui <- fluidPage(
-#   ## Here we define the header of the survey. 
-#   tags$div(class="h1", checked=NA, align ="center",
-#            tags$p("Verwaltungshilfe-Tool", style = "color:#ffffff; 
-#                                                     font-family: Calibri; 
-#                                                     font-size:40px")),
-#   
-#   ## Defining the description/subheading. 
-#   tags$div(class="h2", checked=NA, align ="center",
-#            tags$p("RAM-Förderungen / - Preisvergabe", style = "color:#ffffff; 
-#                                                               font-family: Calibri; 
-#                                                               font-size:25px")),
-#   
-#   ## Changing the survey area sub-background & questions. 
+#   ## Here we define the header of the survey.
+#   tags$div(class="h1", checked=NA, align ="center", style = "color:#ffffff;
+#                                                              font-family: Calibri;
+#                                                              font-size:30px",
+#            tags$p("Verwaltungshilfe-Tool")),
+# 
+#   ## Defining the description/subheading.
+#   tags$div(class="h2", checked=NA, align ="center", style = "color:#ffffff;
+#                                                              font-family: Calibri;
+#                                                              font-size:25px",
+#            tags$p("RAM-Förderungen / - Preisvergabe")),
+# 
+#   ## Changing the survey area sub-background & questions.
 #   ## How to change question cell background color??
-#   tags$div(
-#     dataTableOutput("dat"),
-#     style = "background-color: #0a477a;      ### color of sub-background
-#              color:#0a477a;                 ### color of the question-text
-#              font-family: Arial;            ### Question-text font-family
-#              font-size: 30px;              ### Question font size, Error!
-#              ",
-#     
+#   tags$div(dataTableOutput("dat"), style = "background-color:#759dbd;            ### color of sub-background
+#                                             color:#0a477a;                       ### color of the question-text
+#                                             font-family: Arial;                  ### Question-text font-family
+#                                             font-size: 30px"),                   ### Question font size, Error!
+# 
 #   # Create a questionnaire with "surveyOutput".
 #   #df:                 The data.frame containing the questions.
 #   #survey_title:       Should be shown at the top of the page.
 #   #survey_description: Should be shown underneath the title.
-#   surveyOutput(df = dat,
-#                # survey_title = "Hallo RAM!",
-#                # survey_description = "Hier könnt Ihr die Infos für RAM-Förderungen und RAM-Preise eintragen",
-#                 theme = "style.css",                                                                               ## Defining page background color
-#                 style = "color: #759dbd;                                                                         ## Defining submit-button, color white does not appear?
-#                        font-family: Calibri;
-#                        font-size:20px,"                                                                         
-#                ) 
-#           )
-# )
+#   surveyOutput(df = dat, ##   survey_title = "Hallo RAM!",
+#                          ##   survey_description = "Hier könnt Ihr die Infos für RAM-Förderungen und RAM-Preise eintragen",
+#                          theme = "#759dbd",                                                                              ## Defining page background color
+#                          style = "color: #043a6f;                                                                        ## Defining submit-button, color white does not appear?
+#                                   font-family: Calibri;
+#                                   font-size:20px,"
+#               )
+#            )
 
-################################################################################
+###############################################################################
 
 ui <- fluidPage(
- ## Here we define the header of the survey.
- tags$div(class="h1", checked=NA, align ="center",
-          tags$p("Verwaltungshilfe-Tool", style = "color:#ffffff;
-                                                   font-family: Calibri;
-                                                   font-size:40px")),
+  ## Here we define the header of the survey.
+  tags$div(class="h1", checked=NA, align ="center",
+           tags$p("Verwaltungshilfe-Tool", style = "color:#ffffff;
+                                                    font-family: Calibri;
+                                                    font-size:40px")),
 
- ## Defining the description/subheading.
- tags$div(class="h2", checked=NA, align ="center",
-          tags$p("RAM-Förderungen / - Preisvergabe", style = "color:#ffffff;
-                                                             font-family: Calibri;
-                                                             font-size:25px")),
+  ## Defining the description/subheading.
+  tags$div(class="h2", checked=NA, align ="center",
+           tags$p("RAM-Förderungen / - Preisvergabe", style = "color:#ffffff;
+                                                               font-family: Calibri;
+                                                               font-size:25px")),
 
- ## Changing the survey area sub-background & questions.
- ## How to change question cell background color??
- tags$div(
-   dataTableOutput("dat"),
-   style = "background-color:#0a477a;      ### color of sub-background
-            color:#0a477a;                 ### color of the question-text
-            font-family: Arial;            ### Question-text font-family
-            font-size: 30px",              ### Question font size, Error!
+  ## Changing the survey area sub-background & questions.
+  ## How to change question cell background color??
+  tags$div(dataTableOutput("dat"), style = "background-color:#ffffff;      ### color of sub-background
+                                            color:#0a477a;                 ### color of the question-text
+                                            font-family: Arial;            ### Question-text font
+                                            font-size: 30px",              ### Question font size, Error!
 
-
-   # Create a questionnaire with "surveyOutput".
+  # Create a questionnaire with "surveyOutput".
   #df:                 The data.frame containing the questions.
   #survey_title:       Should be shown at the top of the page.
   #survey_description: Should be shown underneath the title.
-   surveyOutput(df = dat,
-                # survey_title = "Hallo RAM!",
-                # survey_description = "Hier könnt Ihr die Infos für RAM-Förderungen und RAM-Preise eintragen",
-                theme = "#759dbd",                                                                               ## Defining page background color
-                style = "color: #759dbd;                                                                         ## Defining submit-button, color white does not appear?
-                      font-family: Calibri;
-                     font-size:20px,"
-  )
- )
+  surveyOutput(df = dat, # survey_title = "Hallo RAM!",
+                         # survey_description = "Hier könnt Ihr die Infos für RAM-Förderungen und RAM-Preise eintragen",
+                         theme = "#759dbd",                                                                               ## Defining page background color
+                         style = "color: #0a477a;                                                                         ## Defining submit-button, color white does not appear?
+                                  font-family: Calibri;
+                                  font-size:20px,"
+              )
+        )
 )
+
 
 #2-2   Server####
 
