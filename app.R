@@ -211,8 +211,8 @@ server <- function(input, output, session) {
       #write new excel with today's date
       write_xlsx(merged, paste0('funding_overview_all_',Sys.Date() ,'.xlsx'))
       showModal(modalDialog(
-            title = "Congrats, you completed your first shinysurvey!",
-            "You can customize what actions happen when a user finishes a survey using input$submit."
+            title = "Thanks for using this tool! You can now find your updated excelfile in
+            your directory. You can close this window now"
         ))
     })
 }
