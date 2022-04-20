@@ -188,6 +188,31 @@ server <- function(input, output, session) {
       if (response_data$funding_type == 'HIDDEN-QUESTION') {
         response_data$funding_type <- ''
       }
+      
+    # Deepl Implementation  
+      if (responsedata$language == "de"){
+        # duplicate response vector from responsedata-dataframe
+        eng_response <- responsedata
+        # translate title of last row to english
+        # deepl2englisch(eng_response$title)
+        
+        # change langugage type to 'en'
+        eng_response$language <- "en"
+        # merge english response to responsedata-dataframe
+        eng_response_vec <- eng_response$response
+        # endproduct: dataframe containing to identical rows except the language of the title
+        responsedata <- rbind(responsedata, eng_response_vec)
+        
+      }else if( responsedata$language == "en"){
+        # do nothing
+      }else{
+        # error
+        print("Error: You must indicate language type")
+      }
+      
+    ####### Deepl Implementation end  
+      
+      
       #order data so it fits the excel
       col_order <- c("year", "surname", "name",
                      "level", "major", "supervisor", 
