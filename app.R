@@ -195,15 +195,15 @@ server <- function(input, output, session) {
       if (responsedata$language == "de"){
         # duplicate response vector from responsedata-dataframe
         eng_response <- responsedata
+        
         # translate title of last row to english
         eng_response$title <- toEnglish(eng_response$title)
         
         # change langugage type to 'en'
         eng_response$language <- "en"
+        
         # merge english response to responsedata-dataframe
-        eng_response_vec <- eng_response$response
-        # endproduct: dataframe containing to identical rows except the language of the title
-        responsedata <- rbind(responsedata, eng_response_vec)
+        responsedata <- rbind(responsedata, eng_response)
         
       }else if( responsedata$language == "en"){
         # do nothing
