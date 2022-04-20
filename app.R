@@ -26,6 +26,7 @@ libr("readxl")       #Necessary for reading the excel-File we want to append the
                      #of the survey to.
 libr("writexl")      #Will probably be necessary for writing the excel-File in the end.
 libr("tidyverse")    #necessary for data wrangling
+libr("deepl")       # necessacry for title translation; authentification-key needed
 #1-2   Import data####
 
 #1-2-1 Survey data####
@@ -189,12 +190,13 @@ server <- function(input, output, session) {
         response_data$funding_type <- ''
       }
       
-    # Deepl Implementation  
+    ### Deepl Implementation
+      
       if (responsedata$language == "de"){
         # duplicate response vector from responsedata-dataframe
         eng_response <- responsedata
         # translate title of last row to english
-        # deepl2englisch(eng_response$title)
+        eng_response$title <- toEnglish(eng_response$title)
         
         # change langugage type to 'en'
         eng_response$language <- "en"
@@ -210,7 +212,7 @@ server <- function(input, output, session) {
         print("Error: You must indicate language type")
       }
       
-    ####### Deepl Implementation end  
+    ### Deepl Implementation end  
       
       
       #order data so it fits the excel
