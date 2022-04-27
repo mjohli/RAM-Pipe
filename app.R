@@ -192,20 +192,21 @@ server <- function(input, output, session) {
       
     ### Deepl Implementation
       
-      if (responsedata$language == "de"){
+      if (response_data$language == "de"){
         # duplicate response vector from responsedata-dataframe
-        eng_response <- responsedata
+        eng_response <- response_data
         
         # translate title of last row to english
-        eng_response$title <- toEnglish(eng_response$title, auth_key = "e466d0b1-7c37-7a42-c418-6a22b8da6967:fx")
+        to_be_translated <- eng_response$title
+        eng_response$title <- toEnglish2(eng_response$title, auth_key = "e466d0b1-7c37-7a42-c418-6a22b8da6967:fx")
         
         # change langugage type to 'en'
         eng_response$language <- "en"
         
         # merge english response to responsedata-dataframe
-        responsedata <- rbind(responsedata, eng_response)
+        response_data <- rbind(response_data, eng_response)
         
-      }else if( responsedata$language == "en"){
+      }else if( response_data$language == "en"){
         # do nothing
       }else{
         # error
