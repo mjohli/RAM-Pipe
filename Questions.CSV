@@ -32,6 +32,5 @@ Förderungsart;Förderung;mc;funding_type;type;Förderung;T
 Titel der Arbeit;;text;title;NA;NA;T
 Sprache der Arbeit;de;mc;language;NA;NA;T
 Sprache der Arbeit;en;mc;language;NA;NA;T
-Englische Übersetzung des Titels;;text;titleEn;language;de;T
 Ort;;text;location;NA;NA;T
 Land;;text;country;NA;NA;T
