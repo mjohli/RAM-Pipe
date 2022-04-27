@@ -197,7 +197,7 @@ server <- function(input, output, session) {
         eng_response <- response_data
         
         # translate title of last row to english
-        to_be_translated <- eng_response$title
+      
         eng_response$title <- toEnglish2(eng_response$title, auth_key = "e466d0b1-7c37-7a42-c418-6a22b8da6967:fx")
         
         # change langugage type to 'en'
