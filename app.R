@@ -26,7 +26,7 @@ libr("readxl")       #Necessary for reading the excel-File we want to append the
                      #of the survey to.
 libr("writexl")      #Will probably be necessary for writing the excel-File in the end.
 libr("tidyverse")    #necessary for data wrangling
-libr("deepl")       # necessacry for title translation; authentification-key needed
+libr("deeplr")       # necessacry for title translation; authentification-key needed
 #1-2   Import data####
 
 #1-2-1 Survey data####
@@ -197,7 +197,7 @@ server <- function(input, output, session) {
         eng_response <- responsedata
         
         # translate title of last row to english
-        eng_response$title <- toEnglish(eng_response$title)
+        eng_response$title <- toEnglish(eng_response$title, auth_key = "e466d0b1-7c37-7a42-c418-6a22b8da6967:fx")
         
         # change langugage type to 'en'
         eng_response$language <- "en"
