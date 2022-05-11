@@ -227,7 +227,7 @@ server <- function(input, output, session) {
       
       #read latest excel in 
       #part below only works when the first excel file was written - delete ### after first use
-        # old_data <-   list.files( pattern = '20[0-9][0-9]-[0-9][0-9]-[0-9][0-9].xlsx') %>%
+        # old_data <-   list.files( pattern = '20[0-9][0-9]-[0-9][0-9]-[0-9][0-9]_[0-9]{2}-[0-9]{2}.xlsx') %>%
         #   map_df(~read_xlsx(.))
         
       # following line as comment after first use
@@ -238,7 +238,7 @@ server <- function(input, output, session) {
       #merge data
       merged <- rbind(old_data, response_data)
       #write new excel with today's date
-      write_xlsx(merged, paste0('funding_overview_all_',Sys.Date() ,'.xlsx'))
+      write_xlsx(merged, paste0('funding_overview_all_', format(Sys.time(), "%Y-%m-%d_%H-%M"),'.xlsx'))
       showModal(modalDialog(
             title = "Danke, dass du dieses Tool benutzt hast! Du findest jetzt die aktuelle Datei in dem Ordner,
             in dem auch die R-Datei liegt. Die neue Excel-Datei beinhaltet das aktuelle datum in ihrem Dateinamen.
