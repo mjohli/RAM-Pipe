@@ -1,6 +1,6 @@
 #0 Clear R's memory
 rm(list=ls())
-
+options(encoding = 'UTF-8')
 getwd() 			           # shows you the present working directory
 dir()                    # shows you what in the wd is
 
@@ -66,6 +66,7 @@ libr("deeplr")       # necessacry for title translation; authentification-key ne
 #page:             If we want more than one page, we can specify on which page the question
 #                  should be.
 dat <- read.csv2("Questions.CSV")
+key <- read.csv("auth-key", header = F)$V1
 
 #Setting the current year as a proposition. Right now this is grey and not 'written' into the
 #input field. In my opinion there are two possibilities how to deal with this: Finding out how
@@ -198,7 +199,7 @@ server <- function(input, output, session) {
         
         # translate title of last row to english
       
-        eng_response$title <- toEnglish2(eng_response$title, auth_key = "e466d0b1-7c37-7a42-c418-6a22b8da6967:fx")
+        eng_response$title <- toEnglish2(eng_response$title, auth_key = key)
         
         # change langugage type to 'en'
         eng_response$language <- "en"

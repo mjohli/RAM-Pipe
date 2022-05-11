@@ -1,5 +1,5 @@
 question;option;input_type;input_id;dependence;dependence_value;required
-Jahr;;numeric;year;NA;NA;T
+Jahr;;numeric;year;NA;NA;F
 Nachname;;text;surname;NA;NA;T
 Vorname;;text;name;NA;NA;T
 Level der Arbeit;Bachelor;mc;level;NA;NA;T
@@ -18,7 +18,7 @@ Fach;CDSS;mc;major;NA;NA;T
 Fach;Sonstiges;mc;major;NA;NA;T
 Fach;;text;majorAlt;major;Sonstiges;T
 Betreuer*in;;text;supervisor;NA;NA;T
-Art;Förderung;mc;type;NA;NA;T
+Art;FÃ¶rderung;mc;type;NA;NA;T
 Art;Preis;mc;type;NA;NA;T
 Preis;Franz-Urban-Pappi-Preis;mc;prize;type;Preis;T
 Preis;Otto-Selz-Preis;mc;prize;type;Preis;T
@@ -27,8 +27,8 @@ Preis;RAM-Preis;mc;prize;type;Preis;T
 Preis;RAT-Preis;mc;prize;type;Preis;T
 Preis;Sonstiges;mc;prize;type;Preis;T
 Preis;;text;prizeAlt;prize;Sonstiges;T
-Förderungsart;Teilförderung;mc;funding_type;type;Förderung;T
-Förderungsart;Förderung;mc;funding_type;type;Förderung;T
+FÃ¶rderungsart;TeilfÃ¶rderung;mc;funding_type;type;FÃ¶rderung;T
+FÃ¶rderungsart;FÃ¶rderung;mc;funding_type;type;FÃ¶rderung;T
 Titel der Arbeit;;text;title;NA;NA;T
 Sprache der Arbeit;de;mc;language;NA;NA;T
 Sprache der Arbeit;en;mc;language;NA;NA;T
