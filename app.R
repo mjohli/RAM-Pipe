@@ -74,7 +74,7 @@ key <- read.csv("auth-key", header = F)$V1
 #the year variable in the output-file to the current year if it's left empty. Also for year it would
 #be of interest if we can define minimum and maximum input values. This should at least be possible
 #using if-statements inside the ui and/or server.
-dat$option[dat$question == "Jahr"] <- format(Sys.Date(), "%Y")
+dat$option[dat$question == ""] <- format(Sys.Date(), "%Y")
 
 #1-2-2 Table####
 
@@ -240,8 +240,9 @@ server <- function(input, output, session) {
       #write new excel with today's date
       write_xlsx(merged, paste0('funding_overview_all_',Sys.Date() ,'.xlsx'))
       showModal(modalDialog(
-            title = "Thanks for using this tool! You can now find your updated excelfile in
-            your directory. You can close this window now"
+            title = "Danke, dass du dieses Tool benutzt hast! Du findest jetzt die aktuelle Datei in dem Ordner,
+            in dem auch die R-Datei liegt. Die neue Excel-Datei beinhaltet das aktuelle datum in ihrem Dateinamen.
+            Du kannst dieses Fenster jetzt schließen. "
         ))
     })
 }
