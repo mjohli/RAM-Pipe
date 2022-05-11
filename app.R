@@ -241,7 +241,7 @@ server <- function(input, output, session) {
       write_xlsx(merged, paste0('funding_overview_all_', format(Sys.time(), "%Y-%m-%d_%H-%M"),'.xlsx'))
       showModal(modalDialog(
             title = "Danke, dass du dieses Tool benutzt hast! Du findest jetzt die aktuelle Datei in dem Ordner,
-            in dem auch die R-Datei liegt. Die neue Excel-Datei beinhaltet das aktuelle datum in ihrem Dateinamen.
+            in dem auch die R-Datei liegt. Die neue Excel-Datei beinhaltet das aktuelle Datum in ihrem Dateinamen.
             Du kannst dieses Fenster jetzt schließen. "
         ))
     })
