@@ -191,30 +191,166 @@ server <- function(input, output, session) {
         response_data$funding_type <- ''
       }
       
-    ### Deepl Implementation
+### Deepl Implementation and hard-code translations ###
       
+      # duplicate response vector from responsedata-dataframe. Translations will be stored in each of
+      # these vectors depending on the origin language indicated. If the origin language is English, the 
+      # German responses will be translated and stored in the response vector. You can see that when there
+      # are two if-statements depending on origin language.
+      
+      eng_response <- response_data
+      germ_response <- response_data
+      
+#title, location, country (Note: location translation does not really work)      
       if (response_data$language == "de"){
-        # duplicate response vector from responsedata-dataframe
-        eng_response <- response_data
         
-        # translate title of last row to english
-      
-        eng_response$title <- toEnglish2(eng_response$title, auth_key = key)
+        # translate title,location and country to English 
+        eng_response$title <- toEnglish2(response_data$title, auth_key = key)
+        eng_response$location <- toEnglish2(response_data$location, auth_key = key)
+        eng_response$country <- toEnglish2(response_data$country, auth_key = key)
         
         # change langugage type to 'en'
         eng_response$language <- "en"
         
-        # merge english response to responsedata-dataframe
-        response_data <- rbind(response_data, eng_response)
-        
       }else if( response_data$language == "en"){
-        # do nothing
+        # translate title, location and country to German
+        germ_response$title <- toGerman2(response_data$title, auth_key = key)
+        germ_response$location <- toGerman2(response_data$location, auth_key = key)
+        germ_response$country <- toGerman2(response_data$country, auth_key = key)
+        
+        # change langugage type to 'de'
+        germ_response$language <- "de"
+        
       }else{
         # error
         print("Error: You must indicate language type")
       }
+ 
+##NOTE: For each variable there will be two if-statements depending on the origin language.
+      # That is necessary to translate German responses, although language type is English due to 
+      # the fact, that the survey is in German and some responses have to be translated to English
+      # They will be then stored in the baseline-vector, the response_data vector.
       
-    ### Deepl Implementation end  
+      #IMPORTANT: Translation of type must be after translation of prize, or you have to change 'Preis'
+      # 'award' in the prize section, otherwise it won't translate it.
+      
+#level_de ACHTUNG: Sonstige Angabe wird hier aktuell noch nicht übersetzt!
+      if(response_data$language == "de" & response_data$level == "Diplom"){
+        eng_response$level <- "Diploma"
+      }else{}
+      
+#level_en ACHTUNG: Sonstige Angabe wird hier aktuell noch nicht übersetzt!
+      if(response_data$language == "en" & response_data$level == "Diplom"){
+        response_data$level <- "Diploma"
+      }else{}
+      
+      
+#major_de ACHTUNG: Sonstige Angabe wird hier aktuell noch nicht übersetzt!
+     if (response_data$language == "de" && response_data$major == "Soziologie"){
+       eng_response$major <- "Sociology"
+     }else if(response_data$language == "de" && response_data$major == "Politikwissenschaften"){
+       eng_response$major <- "Political Science"
+     }else if(response_data$language == "de" && response_data$major == "Psychologie"){
+       eng_response$major <- "Psycology"
+     }else if(response_data$language == "de" && response_data$major == "Sozialwissenschaften"){
+       eng_response$major <- "Social Science"
+     }else if(response_data$language == "de" && response_data$major == "Erziehungswissenschaften"){
+       eng_response$major <- "Educational Studies"
+     }else if(response_data$language == "de" && response_data$major == "CDSS"){
+       eng_response$major <- "CDSS"
+     }else{}
+      
+#major_en ACHTUNG: Sonstige Angabe wird hier aktuell noch nicht übersetzt!      
+      if (response_data$language == "en" && response_data$major == "Soziologie"){
+        response_data$major <- "Sociology"
+      }else if(response_data$language == "en" && response_data$major == "Politikwissenschaften"){
+        response_data$major <- "Political Science"
+      }else if(response_data$language == "en" && response_data$major == "Psychologie"){
+        response_data$major <- "Psychology"
+      }else if(response_data$language == "en" && response_data$major == "Sozialwissenschaften"){
+        response_data$major <- "Social Science"
+      }else if(response_data$language == "en" && response_data$major == "Erziehungswissenschaften"){
+        response_data$major <- "Educational Studies"
+      }else if(response_data$language == "en" && response_data$major == "CDSS"){
+        response_data$major <- "CDSS"
+      }else{}
+      
+
+#prize_de ACHTUNG: Sonstige Angabe wird hier aktuell noch nicht übersetzt!
+      if (response_data$language == "de" & response_data$type == "Preis" & response_data$prize == "Franz-Urban-Pappi-Preis"){
+        eng_response$prize <- "Franz-Urban-Pappi-Award"
+        
+      }else if(response_data$language == "de" & response_data$type == "Preis" & response_data$prize == "Otto-Selz-Preis"){
+        eng_response$prize <- "Otto-Selz-Award"
+        
+      }else if(response_data$language == "de" & response_data$type == "Preis" & response_data$prize == "Hans-Albert-Preis"){
+        eng_response$prize <- "Hans-Albert-Award"
+        
+      }else if(response_data$language == "de" & response_data$type == "Preis" & response_data$prize == "RAM-Preis"){
+        eng_response$prize <- "RAM-Award"
+        
+      }else if(response_data$language == "de" & response_data$type == "Preis" & response_data$prize == "RAT-Preis"){
+        eng_response$prize <- "RAT-Award"
+        
+      }else{}
+      
+#prize_en ACHTUNG: Sonstige Angabe wird hier aktuell noch nicht übersetzt!
+      if (response_data$language == "en" & response_data$type == "Preis" & response_data$prize == "Franz-Urban-Pappi-Preis"){
+        response_data$prize <- "Franz-Urban-Pappi-Award"
+        
+      }else if(response_data$language == "en" & response_data$type == "Preis" & response_data$prize == "Otto-Selz-Preis"){
+        response_data$prize <- "Otto-Selz-Award"
+        
+      }else if(response_data$language == "en" & response_data$type == "Preis" & response_data$prize == "Hans-Albert-Preis"){
+        response_data$prize <- "Hans-Albert-Award"
+        
+      }else if(response_data$language == "en" & response_data$type == "Preis" & response_data$prize == "RAM-Preis"){
+        response_data$prize <- "RAM-Award"
+        
+      }else if(response_data$language == "en" & response_data$type == "Preis" & response_data$prize == "RAT-Preis"){
+        response_data$prize <- "RAT-Award"
+        
+      }else{}
+      
+      
+#type_de
+      if (response_data$language == "de" && response_data$type == "Förderung"){
+        eng_response$type <- "funding"
+      }else if(response_data$language == "de" && response_data$type == "Preis"){
+        eng_response$type <- "award"
+      }else{} 
+      
+#type_en
+      if (response_data$language == "en" && response_data$type == "Förderung"){
+        response_data$type <- "funding"
+      }else if(response_data$language == "en" && response_data$type == "Preis"){
+        response_data$type <- "award"
+      }else{}
+      
+      
+#funding_type_de
+      if (response_data$language == "de" & response_data$funding_type == "Teilförderung"){
+        eng_response$funding_type <- "Partial funding"
+      }else if(response_data$language == "de" & response_data$funding_type == "Förderung"){
+        eng_response$funding_type <- "funding"
+      }else{}
+      
+#funding_type_en
+      if (response_data$language == "en" & response_data$funding_type == "Teilförderung"){
+        response_data$funding_type <- "Partial funding"
+      }else if(response_data$language == "en" & response_data$funding_type == "Förderung"){
+        response_data$funding_type <- "funding"
+      }else{}  
+      
+## merge translated responses to responsedata-dataframe
+      
+      if(response_data$language == "de"){
+        response_data <- rbind(response_data, eng_response)
+      }else if(response_data$language == "en"){
+        response_data <- rbind(response_data, germ_response)
+      }else{print("ERROR: You must indicate language!")}
+      
+### Deepl Implementation end ###  
       
       
       #order data so it fits the excel
@@ -227,11 +363,11 @@ server <- function(input, output, session) {
       
       #read latest excel in 
       #part below only works when the first excel file was written - delete ### after first use
-        # old_data <-   list.files( pattern = '20[0-9][0-9]-[0-9][0-9]-[0-9][0-9]_[0-9]{2}-[0-9]{2}.xlsx') %>%
-        #   map_df(~read_xlsx(.))
+        old_data <-   list.files( pattern = '20[0-9][0-9]-[0-9][0-9]-[0-9][0-9]_[0-9]{2}-[0-9]{2}.xlsx') %>%
+           map_df(~read_xlsx(.))
         
       # following line as comment after first use
-      old_data <- read_xlsx("funding_overview_all.xlsx")
+    #  old_data <- read_xlsx("funding_overview_all.xlsx")
         
       #(over)write archive version
       write_xlsx(old_data, 'funding_overview_all_alt.xlsx')
@@ -240,9 +376,9 @@ server <- function(input, output, session) {
       #write new excel with today's date
       write_xlsx(merged, paste0('funding_overview_all_', format(Sys.time(), "%Y-%m-%d_%H-%M"),'.xlsx'))
       showModal(modalDialog(
-            title = "Danke, dass du dieses Tool benutzt hast! Du findest jetzt die aktuelle Datei in dem Ordner,
-            in dem auch die R-Datei liegt. Die neue Excel-Datei beinhaltet das aktuelle Datum in ihrem Dateinamen.
-            Du kannst dieses Fenster jetzt schließen. "
+            title = "Daten gespeichert.
+            WICHTIG: Vor der nächsten Ausführung Excel-File schließen, falls offen! 
+            Du kannst dieses Fenster jetzt schließen. Vielen Dank für die Benutzung! "
         ))
     })
 }
